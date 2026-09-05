@@ -1,16 +1,41 @@
-# React + Vite
+# First Principles — 1-on-1 STEM Tutoring
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Landing page for First Principles, one-to-one tutoring in Mathematics, Physics and
+Chemistry for ambitious Form 2–4 students (Nairobi + online).
 
-Currently, two official plugins are available:
+**Positioning:** good grades aren't the finish line — reasoning is. The site trains
+trust in sequence: who teaches → grade vs degree → method → evidence → offer →
+pricing → booking.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+React 19 + Vite + Tailwind CSS v4 + shadcn-style UI + Motion + lucide-react.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Develop
 
-## Expanding the Oxlint configuration
+```bash
+npm install
+npm run dev      # http://localhost:5173
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Build & deploy
+
+```bash
+npm run build    # outputs dist/
+```
+
+`dist/` deploys anywhere as static files (relative asset paths). GitHub Pages
+deploys automatically via `.github/workflows/pages.yml`. The Vercel production
+target builds from `main`.
+
+## Project layout
+
+- `src/designs/design-b.jsx` — the landing page (all sections)
+- `src/content.js` — every word on the site + pricing + FAQs + articles
+- `src/components/` — gradient background, overlays, cookie banner, PWA/analytics helpers
+- `public/gregory.png` — tutor photo · `public/manifest.webmanifest`, `sw.js` — PWA
+
+## Contact channels (live on site)
+
+- WhatsApp: https://wa.me/254745947704 (per-section prefilled messages in `content.js`)
+- Email: gregorykimemiah@gmail.com

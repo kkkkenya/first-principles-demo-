@@ -1,7 +1,8 @@
 {
-  "name": "default-project",
+  "name": "first-principles",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "First Principles — 1-on-1 STEM tutoring landing page (Form 2–4, Math/Physics/Chemistry, Nairobi + online)",
   "type": "module",
   "scripts": {
     "dev": "vite",
