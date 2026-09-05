@@ -3,9 +3,12 @@ import { MotionConfig } from "motion/react"
 import { GradientScene } from "@/components/gradient-scene"
 import { CountUp, FadeUp, StaggerGroup, StaggerItem, StaggerList, WordStagger } from "@/components/motion-helpers"
 import { PhotoPlaceholder } from "@/components/photo-placeholder"
+import { ArticleCard } from "@/components/article-overlay"
+import { trackEvent } from "@/lib/analytics"
 import { Button } from "@/components/ui/button"
 import {
   about,
+  articles,
   audience,
   brand,
   diagnostic,
@@ -21,6 +24,8 @@ import {
   outcomes,
   parentNote,
   pricing,
+  waMessages,
+  whatsappFor,
 } from "@/content"
 
 function SectionHead({ index, children }) {
@@ -32,7 +37,7 @@ function SectionHead({ index, children }) {
   )
 }
 
-export function DesignB() {
+export function DesignB({ onOpenLegal, onOpenArticle }) {
   return (
     <MotionConfig reducedMotion="user">
     <div className="relative min-h-screen bg-[#f4f2ee] font-display text-black">
@@ -41,7 +46,7 @@ export function DesignB() {
       <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-10">
         {/* Nav */}
         <header className="fade-up flex items-center justify-between border-b border-black/10 py-6">
-          <p className="text-sm font-black tracking-[0.25em]">{brand.name}</p>
+          <p className="text-xs font-black tracking-[0.25em] md:text-sm">{brand.name}</p>
           <nav className="hidden items-center gap-8 text-xs font-bold tracking-widest md:flex">
             <a href="#how" className="hover:opacity-60">HOW IT WORKS</a>
             <a href="#who" className="hover:opacity-60">WHO IT'S FOR</a>
@@ -54,7 +59,7 @@ export function DesignB() {
         </header>
 
         {/* 1. HERO */}
-        <section className="fade-up py-20 text-center md:py-28" style={{ animationDelay: "100ms" }}>
+        <section className="fade-up py-14 text-center md:py-28" style={{ animationDelay: "100ms" }}>
           <p className="text-xs font-bold tracking-[0.35em] text-black/55">{hero.eyebrow}</p>
           <h1 className="mx-auto mt-8 max-w-5xl text-[12vw] font-black leading-[0.9] tracking-tighter md:text-[7.5rem]">
             <WordStagger text="GOOD GRADES" />
@@ -73,7 +78,7 @@ export function DesignB() {
           </p>
           <PhotoPlaceholder label="Photo: Gregory teaching a session" className="mt-10 w-full" ratio="aspect-video" />
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild href={brand.whatsapp} variant="dark" size="lg" className="rounded-none font-bold tracking-widest">
+            <Button asChild href={brand.whatsapp} variant="dark" size="lg" className="rounded-none font-bold tracking-widest" onClick={() => trackEvent("cta_click", { location: "hero" })}>
               Book a Diagnostic
               <ArrowRight className="h-4 w-4" />
             </Button>
@@ -93,6 +98,8 @@ export function DesignB() {
               <img
                 src="/gregory.png"
                 alt="Gregory Kimemiah — First Principles tutor"
+                loading="lazy"
+                decoding="async"
                 className="aspect-[4/5] w-full object-cover object-top"
               />
             </div>
@@ -143,9 +150,9 @@ export function DesignB() {
               </StaggerList>
             </div>
           </div>
-          <div className="mt-10 text-center">
-            <p className="text-2xl font-black tracking-tight md:text-3xl">{gradeVsDegree.close}</p>
-            <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-black/60 md:text-base">{gradeVsDegree.sub}</p>
+          <div className="mx-auto mt-14 max-w-3xl text-center">
+            <p className="text-3xl font-black leading-tight tracking-tight md:text-5xl">{gradeVsDegree.close}</p>
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-black/65 md:text-xl">{gradeVsDegree.sub}</p>
           </div>
         </section>
 
@@ -192,7 +199,7 @@ export function DesignB() {
             <p className="mt-10 max-w-2xl border-l-2 border-white/40 pl-5 text-base font-medium italic leading-relaxed text-white/85">
               {diagnostic.close}
             </p>
-            <Button asChild href={brand.whatsapp} variant="glow" size="lg" className="mt-10 rounded-none font-bold tracking-widest">
+            <Button asChild href={brand.whatsapp} variant="glow" size="lg" className="mt-10 rounded-none font-bold tracking-widest" onClick={() => trackEvent("cta_click", { location: "diagnostic_box" })}>
               <MessageCircle className="h-4 w-4" />
               Book a Diagnostic
             </Button>
@@ -313,7 +320,7 @@ export function DesignB() {
                       </li>
                     ))}
                   </ul>
-                  <Button asChild href={brand.whatsapp} variant={featured ? "glow" : "dark"} size="default" className="mt-8 w-full rounded-none font-bold tracking-widest">
+                  <Button asChild href={whatsappFor(waMessages[t.waKey])} variant={featured ? "glow" : "dark"} size="default" className="mt-8 w-full rounded-none font-bold tracking-widest" onClick={() => trackEvent("cta_click", { location: `pricing_${t.name}` })}>
                     {t.cta}
                   </Button>
                 </div>
@@ -362,7 +369,7 @@ export function DesignB() {
               <p className="text-lg font-black tracking-tight">Tell us your child's timetable.</p>
               <p className="mt-1 text-sm text-white/65">We'll fit sessions around school hours — evenings and weekends included.</p>
             </div>
-            <Button asChild href={brand.whatsapp} variant="glow" size="default" className="shrink-0 rounded-none font-bold tracking-widest">
+            <Button asChild href={whatsappFor(waMessages.timetable)} variant="glow" size="default" className="shrink-0 rounded-none font-bold tracking-widest" onClick={() => trackEvent("cta_click", { location: "timetable" })}>
               <MessageCircle className="h-4 w-4" />
               Plan sessions
             </Button>
@@ -385,23 +392,50 @@ export function DesignB() {
           </div>
         </section>
 
-        {/* 12. FINAL CTA */}
+        {/* 12. STUDY NOTES */}
+        <section className="border-t border-black/10 py-16 md:py-24">
+          <SectionHead index="09">STUDY NOTES</SectionHead>
+          <p className="mt-8 max-w-xl text-base leading-relaxed text-black/65">
+            Short, free revision notes written the way we teach — derivation first, memorisation
+            last. New notes appear here regularly.
+          </p>
+          <div className="mt-10 grid gap-6 md:grid-cols-2">
+            {articles.map((a) => (
+              <ArticleCard key={a.slug} article={a} onOpen={onOpenArticle} />
+            ))}
+          </div>
+        </section>
+
+        {/* 13. FINAL CTA */}
         <section className="border-t border-black/10 py-20 text-center md:py-28">
           <h2 className="mx-auto max-w-4xl text-5xl font-black leading-[0.95] tracking-tighter md:text-7xl">
             {finalCta.title}
           </h2>
           <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-black/65 md:text-lg">{finalCta.body}</p>
           <div className="mt-10">
-            <Button asChild href={brand.whatsapp} variant="dark" size="xl" className="rounded-none font-bold tracking-widest">
+            <Button asChild href={brand.whatsapp} variant="dark" size="xl" className="rounded-none font-bold tracking-widest" onClick={() => trackEvent("cta_click", { location: "final" })}>
               <MessageCircle className="h-5 w-5" />
               BOOK A FREE DIAGNOSTIC
             </Button>
           </div>
           <p className="mt-4 text-xs tracking-wide text-black/50">{finalCta.note}</p>
-          <footer className="mt-20 flex flex-col items-center justify-between gap-3 border-t border-black/10 pt-8 text-[10px] font-bold tracking-[0.3em] text-black/45 md:flex-row">
-            <span>{brand.name}</span>
-            <span>Kahawa Sukari · Ruiru · Thika Rd — Online anywhere</span>
-            <span>{brand.email}</span>
+          <footer className="mt-20 border-t border-black/10 pt-8">
+            <div className="flex flex-col items-center justify-between gap-3 text-[10px] font-bold tracking-[0.3em] text-black/45 md:flex-row">
+              <span>{brand.name}</span>
+              <span>Kahawa Sukari · Ruiru · Thika Rd — Online anywhere</span>
+              <span>{brand.email}</span>
+            </div>
+            <div className="mt-6 flex flex-col items-center justify-between gap-3 text-[11px] text-black/50 md:flex-row">
+              <span>© 2026 {brand.name}. All rights reserved.</span>
+              <div className="flex gap-6">
+                <button onClick={() => onOpenLegal?.("privacy")} className="cursor-pointer font-bold tracking-widest underline underline-offset-4 hover:text-black">
+                  PRIVACY POLICY
+                </button>
+                <button onClick={() => onOpenLegal?.("terms")} className="cursor-pointer font-bold tracking-widest underline underline-offset-4 hover:text-black">
+                  TERMS OF SERVICE
+                </button>
+              </div>
+            </div>
           </footer>
         </section>
       </div>

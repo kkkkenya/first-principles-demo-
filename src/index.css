@@ -10,12 +10,14 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
   background: #0a0a0f;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 /* ---------- Animated flowing gradient background ---------- */

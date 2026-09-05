@@ -1,0 +1,18 @@
+{
+  "name": "First Principles — 1-on-1 STEM Tutoring",
+  "short_name": "First Principles",
+  "description": "1-on-1 Math, Physics and Chemistry for Form 2–4 students. Reasoning behind the grade.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#f4f2ee",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,8 +1,25 @@
+const WA_NUMBER = "254745947704"
+
+export function whatsappFor(message) {
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`
+}
+
+export const waMessages = {
+  diagnostic:
+    "Hi First Principles! I'd like to book a FREE diagnostic session. My child is in Form ___ studying ___.",
+  online:
+    "Hi First Principles! I'm interested in Online 1-on-1 sessions (KES 1,500). My child is in Form ___ studying ___.",
+  inPerson:
+    "Hi First Principles! I'm interested in In-Person 2-hour sessions (KES 2,500). We're around ___. My child is in Form ___.",
+  timetable:
+    "Hi First Principles! I'd like to plan sessions around my child's timetable. They're in Form ___ studying ___.",
+}
+
 export const brand = {
   name: "FIRST PRINCIPLES",
   tagline: "1-on-1 STEM tutoring · Form 2–4 · Nairobi, Kenya",
   location: "Nairobi / Kenya",
-  whatsapp: "https://wa.me/254745947704?text=Hi%20—%20I'd%20like%20to%20book%20a%20diagnostic%20session",
+  whatsapp: whatsappFor(waMessages.diagnostic),
   whatsappShort: "wa.me/254745947704",
   email: "gregorykimemiah@gmail.com",
 }
@@ -315,6 +332,7 @@ export const pricing = {
       includes: ["45–60 minute 1-on-1 assessment", "Written feedback report for you", "10-minute parent debrief call", "Sample problem set to try at home"],
       excludes: ["No full topic coverage", "No ongoing tracking"],
       cta: "Book Free Diagnostic",
+      waKey: "diagnostic",
     },
     {
       name: "ONLINE 1-ON-1",
@@ -323,6 +341,7 @@ export const pricing = {
       includes: ["60–90 minutes live on Google Meet / Zoom", "Shared whiteboard every session", "Session recordings for revision", "Progress tracking sheet for parents", "Free rescheduling with 24h notice", "Exam-paper drill packs per topic"],
       excludes: ["Not in-person", "No printed materials", "Standard slots only"],
       cta: "Start Online",
+      waKey: "online",
     },
     {
       name: "IN-PERSON 2-HOUR",
@@ -333,6 +352,7 @@ export const pricing = {
       includes: ["Everything in Online, plus:", "2 full hours, face-to-face", "I come to you — sessions at your home", "Worked solutions to keep", "Timed practice marked in-session", "Priority slot booking", "Termly progress report + parent meeting", "Exam-term crash intensive access", "Printed revision packs per topic"],
       excludes: ["Only around the Thika Rd corridor", "Limited slots each week"],
       cta: "Book In-Person",
+      waKey: "inPerson",
       featured: true,
     },
   ],
@@ -374,6 +394,72 @@ export const faq = {
     },
   ],
 }
+
+export const articles = [
+  {
+    slug: "derive-quadratic-formula",
+    title: "Derive the quadratic formula — so you never memorise it again",
+    excerpt:
+      "Most students can recite x = (−b ± √(b²−4ac)) / 2a. Almost none can rebuild it if they forget. Here's the 6-step derivation, and why it matters more than the formula.",
+    minutes: 6,
+    sections: [
+      {
+        head: "Why derivation beats memorisation",
+        paras: [
+          "A memorised formula is a single point of failure: forget one sign and the whole question collapses. A derived formula is a path you can walk again — even mid-exam, even under pressure.",
+          "This is the difference between what earns the grade (recall) and what earns the degree (reasoning). The derivation below takes six steps. Learn it once and the formula is yours permanently.",
+        ],
+      },
+      {
+        head: "The derivation, step by step",
+        paras: [
+          "Start with ax² + bx + c = 0, where a ≠ 0. Step 1: divide everything by a → x² + (b/a)x + c/a = 0.",
+          "Step 2: move the constant over → x² + (b/a)x = −c/a. Step 3: complete the square — add (b/2a)² to both sides.",
+          "Step 4: the left side is now a perfect square → (x + b/2a)² = b²/4a² − c/a. Step 5: combine the right side over 4a² → (x + b/2a)² = (b² − 4ac) / 4a².",
+          "Step 6: take the square root of both sides and isolate x. You get x = (−b ± √(b²−4ac)) / 2a. That ±, that discriminant, that 2a — none of them are magic anymore. Each one came from a step you chose.",
+        ],
+      },
+      {
+        head: "The forget test",
+        paras: [
+          "Cover the formula. Rebuild it from x² + (b/a)x = −c/a on a blank page. If you stall, you don't have a memory problem — you have an understanding gap at exactly the step where you stalled. That step is your next lesson.",
+          "This is what a diagnostic session does systematically: find the exact step where reasoning breaks, then fix that step — not the whole chapter.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "past-papers-stop-working",
+    title: "Why past papers stop working (and what to do instead)",
+    excerpt:
+      "Past papers feel productive — until the exam asks the same idea in unfamiliar clothes. A 3-step protocol for unfamiliar problems, from a tutor who teaches reasoning, not recall.",
+    minutes: 5,
+    sections: [
+      {
+        head: "Recognition is not understanding",
+        paras: [
+          "Most revision trains recognition: see a familiar shape, reproduce a familiar method. It works beautifully — right up until the examiner changes the shape. Then students who 'studied hard' stare at a question built from ideas they technically know.",
+          "The examiner isn't testing whether you saw this question before. They're testing whether you can find a way in when you haven't.",
+        ],
+      },
+      {
+        head: "The 3-step unfamiliar-problem protocol",
+        paras: [
+          "Step 1 — SEE THE PROBLEM: before touching a formula, write down in plain words what is being asked, what is given, and what is unknown. Half of 'hard' questions dissolve here.",
+          "Step 2 — CHOOSE A METHOD, AND SAY WHY: pick an approach and state out loud why it fits — 'energy is conserved here because…'. If you can't say why, you don't have a method, you have a hope.",
+          "Step 3 — EXPLAIN THE ANSWER: after solving, teach it back as if to a classmate who missed the lesson. Every gap in your explanation is a gap in understanding. Close it before the exam does.",
+        ],
+      },
+      {
+        head: "How to practise this",
+        paras: [
+          "Take a past paper you've already done. Change one number, one condition, one assumption — then solve it again. If the change breaks you, your understanding was attached to the specific question, not the idea underneath it.",
+          "Constraint variation like this is a standard technique in our sessions — it converts past papers from memory drills into reasoning training.",
+        ],
+      },
+    ],
+  },
+]
 
 export const finalCta = {
   title: "LET'S FIND OUT WHERE YOUR CHILD REALLY IS.",
